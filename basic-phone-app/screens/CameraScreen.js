@@ -6,7 +6,8 @@ export default class CameraScreen extends Component {
 
     state = {
         hasPermission: null,
-        cameraType: Camera.Constants.Type.front
+        cameraType: Camera.Constants.Type.front,
+        latestImage: null
     }
 
     async componentDidMount() {
@@ -15,9 +16,17 @@ export default class CameraScreen extends Component {
     }
 
     takePicture = async () => {
-        if (this.camera) {
-            let photo = await this.camera.takePictureAsync();
+        if (!this.camera) {
+            return;
         }
+
+        let photo = await this.camera.takePictureAsync();
+
+        if (!photo || !photo.uri) {
+            return
+        }
+
+        this.setState({ latestImage: photo.uri });
     }
 
     render() {
@@ -33,7 +42,7 @@ export default class CameraScreen extends Component {
 
         return (
             <View style={{ flex: 1 }}>
-                <Camera style={{ flex: 1 }} type={type} ref={this.camera}>
+                <Camera style={{ flex: 1 }} type={type} ref={ref => {this.camera = ref}}>
                     <View
                         style={{
                             flex: 1,
