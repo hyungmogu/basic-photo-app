@@ -1,9 +1,6 @@
 import React from 'react';
 import { StyleSheet, StatusBar, Text, View, SafeAreaView } from 'react-native';
 
-import HomeScreen from './screens/HomeScreen';
-import Header from './components/Header';
-
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
