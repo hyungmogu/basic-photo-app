@@ -1,55 +1,62 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState, useEffect, Component } from 'react';
+import { Text, View, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { Camera } from 'expo-camera';
 
-export default function CameraScreen() {
-  const [hasPermission, setHasPermission] = useState(null);
-  const [type, setType] = useState(Camera.Constants.Type.back);
+export default class CameraScreen extends Component {
 
-  useEffect(() => {
-    (async () => {
-      const { status } = await Camera.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
-    })();
-  }, []);
+    state = {
+        hasPermission: null,
+        cameraType: Camera.Constants.Type.front
+    }
 
-  if (hasPermission === null) {
-    return <View />;
-  }
-  if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
-  }
-  return (
-    <View style={{ flex: 1 }}>
-        <Camera style={{ flex: 1 }} type={type}>
-            <View
-                style={{
-                    flex: 1,
-                    flexDirection: 'column'
+    async componentDidMount() {
+        const { status } = await Camera.requestPermissionsAsync();
+        this.setState({ hasPermission: status === 'granted' });
+    }
 
-            }}
-            ></View>
-            <View style={styles.homeFooter}>
-                <TouchableOpacity
-                    style={styles.circleButton}
-                    onPress={() => {
-                    setType(
-                        type === Camera.Constants.Type.back
-                        ? Camera.Constants.Type.front
-                        : Camera.Constants.Type.back
-                    );
-                    }}
-                >
-                </TouchableOpacity>
+    takePicture = async () => {
+        if (this.camera) {
+            let photo = await this.camera.takePictureAsync();
+        }
+    }
+
+    render() {
+        let permission = this.state.hasPermission;
+        let type = this.state.cameraType;
+
+        if (permission === null) {
+            return <View />;
+        }
+        if (permission === false) {
+            return <Text>No access to camera</Text>;
+        }
+
+        return (
+            <View style={{ flex: 1 }}>
+                <Camera style={{ flex: 1 }} type={type} ref={this.camera}>
+                    <View
+                        style={{
+                            flex: 1,
+                            flexDirection: 'column'
+
+                        }}
+                    ></View>
+                    <View style={styles.cameraFooter}>
+                        <TouchableOpacity
+                            style={styles.circleButton}
+                            onPress={this.takePicture}
+                        >
+                        </TouchableOpacity>
+                    </View>
+                </Camera>
             </View>
-        </Camera>
-    </View>
-  );
+        );
+    }
 }
 
 
 const styles = StyleSheet.create({
-    homeFooter: {
+    cameraFooter: {
         height: 100,
         padding: 15,
         display: 'flex',
