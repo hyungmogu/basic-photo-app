@@ -8,7 +8,7 @@ export default class HomeScreen extends Component {
         return (
             <SafeAreaView style={styles.container}>
             <View style={styles.headerContainer}>
-                    <Text style={styles.headerText}>Photo App2</Text>
+                    <Text style={styles.headerText}>Photo App</Text>
             </View>
             <ScrollView>
                 <View style={styles.homeContainer}>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { Camera } from 'expo-camera';
 
 export default function CameraScreen() {
@@ -21,30 +21,50 @@ export default function CameraScreen() {
   }
   return (
     <View style={{ flex: 1 }}>
-      <Camera style={{ flex: 1 }} type={type}>
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: 'transparent',
-            flexDirection: 'row',
-          }}>
-          <TouchableOpacity
-            style={{
-              flex: 0.1,
-              alignSelf: 'flex-end',
-              alignItems: 'center',
+        <Camera style={{ flex: 1 }} type={type}>
+            <View
+                style={{
+                    flex: 1,
+                    flexDirection: 'column'
+
             }}
-            onPress={() => {
-              setType(
-                type === Camera.Constants.Type.back
-                  ? Camera.Constants.Type.front
-                  : Camera.Constants.Type.back
-              );
-            }}>
-            <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}> Flip </Text>
-          </TouchableOpacity>
-        </View>
-      </Camera>
+            ></View>
+            <View style={styles.homeFooter}>
+                <TouchableOpacity
+                    style={styles.circleButton}
+                    onPress={() => {
+                    setType(
+                        type === Camera.Constants.Type.back
+                        ? Camera.Constants.Type.front
+                        : Camera.Constants.Type.back
+                    );
+                    }}
+                >
+                </TouchableOpacity>
+            </View>
+        </Camera>
     </View>
   );
 }
+
+
+const styles = StyleSheet.create({
+    homeFooter: {
+        height: 100,
+        padding: 15,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    circleButton: {
+        borderWidth: 5,
+        borderColor: 'grey',
+        alignItems:'center',
+        justifyContent:'center',
+        width:75,
+        height:75,
+        backgroundColor:'white',
+        borderRadius:150,
+    }
+});
