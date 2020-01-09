@@ -41,6 +41,7 @@ export default class CameraScreen extends Component {
     render() {
         let permission = this.state.hasPermission;
         let type = this.state.cameraType;
+        let photo = this.state.latestImage;
 
         if (permission === null) {
             return <View />;
@@ -60,12 +61,17 @@ export default class CameraScreen extends Component {
                         }}
                     ></View>
                     <View style={styles.cameraFooter}>
-                        <TouchableOpacity
-                            style={styles.circleButton}
-                            onPress={this.takePicture}
-                        >
-                        </TouchableOpacity>
-                        <Image style={{ width: 50, height: 50 }} source={{ uri: this.state.latestImage }}/>
+                        <View style={{flex: 1}}></View>
+                        <View style={{flex: 1, display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+                            <TouchableOpacity
+                                style={styles.circleButton}
+                                onPress={this.takePicture}
+                            >
+                            </TouchableOpacity>
+                        </View>
+                        <View style={{flex: 1, display: 'flex', flexDirection: 'row', justifyContent: 'flex-end'}}>
+                            { photo ? <Image style={{ width: 50, height: 50, borderRadius: 5, borderWidth: 2, borderColor: 'white' }} source={{ uri: this.state.latestImage }}/> : null }
+                        </View>
                     </View>
                 </Camera>
             </View>
@@ -80,7 +86,6 @@ const styles = StyleSheet.create({
         padding: 15,
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'center',
         alignItems: 'center'
     },
     circleButton: {
