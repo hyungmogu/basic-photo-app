@@ -1,6 +1,10 @@
 import React, { useState, useEffect, Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, Alert, Image } from 'react-native';
+
 import { Camera } from 'expo-camera';
+import * as FileSystem from 'expo-file-system';
+
+import uuidv1 from 'uuid/v1';
 
 export default class CameraScreen extends Component {
 
@@ -26,7 +30,12 @@ export default class CameraScreen extends Component {
             return
         }
 
-        this.setState({ latestImage: photo.uri });
+        let filePath = `${FileSystem.documentDirectory}photos/photo_app_${uuidv1()}.jpg`;
+        FileSystem.copyAsync({
+            from: photo.uri,
+            to: filePath
+        });
+        this.setState({ latestImage: filePath });
     }
 
     render() {
@@ -56,6 +65,7 @@ export default class CameraScreen extends Component {
                             onPress={this.takePicture}
                         >
                         </TouchableOpacity>
+                        <Image style={{ width: 50, height: 50 }} source={{ uri: this.state.latestImage }}/>
                     </View>
                 </Camera>
             </View>
