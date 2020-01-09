@@ -1,6 +1,6 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet, StatusBar, Image, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
+import { StyleSheet, StatusBar, Image, Text, View, TouchableOpacity, SafeAreaView, ScrollView} from 'react-native';
 
 export default function App() {
   return (
@@ -8,32 +8,82 @@ export default function App() {
       <View style={styles.headerContainer}>
             <Text style={styles.headerText}>Photo App</Text>
       </View>
-      <View style={styles.homeContainer}>
-        <Image
-          style={styles.image}
-          source={{uri: 'http://via.placeholder.com/200x150'}}
-        />
-        <Image
-          style={styles.image}
-          source={{uri: 'http://via.placeholder.com/200x150'}}
-        />
-        <Image
-          style={styles.image}
-          source={{uri: 'http://via.placeholder.com/200x150'}}
-        />
-        <Image
-          style={styles.image}
-          source={{uri: 'http://via.placeholder.com/200x150'}}
-        />
-        <Image
-          style={styles.image}
-          source={{uri: 'http://via.placeholder.com/200x150'}}
-        />
-        <Image
-          style={styles.image}
-          source={{uri: 'http://via.placeholder.com/200x150'}}
-        />
-      </View>
+      <ScrollView>
+        <View style={styles.homeContainer}>
+          <Image
+            style={styles.image}
+            source={{uri: 'http://via.placeholder.com/200x150'}}
+          />
+          <Image
+            style={styles.image}
+            source={{uri: 'http://via.placeholder.com/200x150'}}
+          />
+          <Image
+            style={styles.image}
+            source={{uri: 'http://via.placeholder.com/200x150'}}
+          />
+          <Image
+            style={styles.image}
+            source={{uri: 'http://via.placeholder.com/200x150'}}
+          />
+          <Image
+            style={styles.image}
+            source={{uri: 'http://via.placeholder.com/200x150'}}
+          />
+          <Image
+            style={styles.image}
+            source={{uri: 'http://via.placeholder.com/200x150'}}
+          />
+          <Image
+            style={styles.image}
+            source={{uri: 'http://via.placeholder.com/200x150'}}
+          />
+          <Image
+            style={styles.image}
+            source={{uri: 'http://via.placeholder.com/200x150'}}
+          />
+          <Image
+            style={styles.image}
+            source={{uri: 'http://via.placeholder.com/200x150'}}
+          />
+          <Image
+            style={styles.image}
+            source={{uri: 'http://via.placeholder.com/200x150'}}
+          />
+          <Image
+            style={styles.image}
+            source={{uri: 'http://via.placeholder.com/200x150'}}
+          />
+          <Image
+            style={styles.image}
+            source={{uri: 'http://via.placeholder.com/200x150'}}
+          />
+          <Image
+            style={styles.image}
+            source={{uri: 'http://via.placeholder.com/200x150'}}
+          />
+          <Image
+            style={styles.image}
+            source={{uri: 'http://via.placeholder.com/200x150'}}
+          />
+          <Image
+            style={styles.image}
+            source={{uri: 'http://via.placeholder.com/200x150'}}
+          />
+          <Image
+            style={styles.image}
+            source={{uri: 'http://via.placeholder.com/200x150'}}
+          />
+          <Image
+            style={styles.image}
+            source={{uri: 'http://via.placeholder.com/200x150'}}
+          />
+          <Image
+            style={styles.image}
+            source={{uri: 'http://via.placeholder.com/200x150'}}
+          />
+        </View>
+      </ScrollView>
       <View style={styles.homeFooter}>
           <TouchableOpacity style={styles.circleButton}>
             <Ionicons name="md-camera" size={30}/>
