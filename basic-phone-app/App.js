@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, StatusBar, Image, Text, View, SafeAreaView } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { StyleSheet, StatusBar, Image, Text, View, Button, SafeAreaView } from 'react-native';
 
 export default function App() {
   return (
@@ -33,6 +34,11 @@ export default function App() {
           source={{uri: 'http://via.placeholder.com/200x150'}}
         />
       </View>
+      <View style={styles.homeFooter}>
+          <View style={styles.circleButton}>
+            <Ionicons name="md-camera" size={30}/>
+          </View>
+      </View>
     </SafeAreaView>
   );
 }
@@ -65,5 +71,22 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     margin: 5,
+  },
+  homeFooter: {
+    height: 100,
+    padding: 15,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  circleButton: {
+    borderWidth:2,
+    borderColor: 'black',
+    alignItems:'center',
+    justifyContent:'center',
+    width:75,
+    height:75,
+    backgroundColor:'#fff',
+    borderRadius:150,
   }
 });
