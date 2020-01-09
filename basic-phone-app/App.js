@@ -1,6 +1,6 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet, StatusBar, Image, Text, View, Button, SafeAreaView } from 'react-native';
+import { StyleSheet, StatusBar, Image, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
 
 export default function App() {
   return (
@@ -35,9 +35,9 @@ export default function App() {
         />
       </View>
       <View style={styles.homeFooter}>
-          <View style={styles.circleButton}>
+          <TouchableOpacity style={styles.circleButton}>
             <Ionicons name="md-camera" size={30}/>
-          </View>
+          </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
