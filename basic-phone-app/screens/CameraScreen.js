@@ -40,8 +40,8 @@ export default class CameraScreen extends Component {
                     }
 
                     return (
-                        <View style={{ flex: 1 }}>
-                            <Camera style={{ flex: 1 }} type={type} ref={ref => {this.camera = ref}}>
+                        <View style={styles.container}>
+                            <Camera style={styles.camera} type={type} ref={ref => {this.camera = ref}}>
                                 <View
                                     style={{
                                         flex: 1,
@@ -50,7 +50,7 @@ export default class CameraScreen extends Component {
                                     }}
                                 ></View>
                                 <View style={styles.cameraFooter}>
-                                    <View style={{flex: 1}}></View>
+                                    <View style={styles.flipContainer}></View>
                                     <View style={styles.buttonContainer}>
                                         <TouchableOpacity
                                             style={styles.circleButton}
@@ -101,6 +101,12 @@ const styles = StyleSheet.create({
         height:75,
         backgroundColor:'white',
         borderRadius:150,
+    },
+    camera: {
+        flex: 1
+    },
+    container: {
+        flex: 1
     },
     buttonContainer: {
         flex: 1,
