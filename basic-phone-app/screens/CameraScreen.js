@@ -64,19 +64,11 @@ export default class CameraScreen extends Component {
                                                 photo: photosPath + photo
                                             })}>
                                                 <Image
-                                                    style={{
-                                                        width: 50,
-                                                        height: 50,
-                                                        borderRadius: 5,
-                                                        borderWidth: 2,
-                                                        borderColor: 'white'
-                                                    }}
+                                                    style={styles.image}
 
                                                     contain={'center'}
 
-                                                    source={{
-                                                        uri: photosPath + photo
-                                                    }}
+                                                    source={{uri: photosPath + photo}}
                                                 />
                                             </TouchableOpacity>
                                         : null}
@@ -109,5 +101,12 @@ const styles = StyleSheet.create({
         height:75,
         backgroundColor:'white',
         borderRadius:150,
+    },
+    image: {
+        width: 50,
+        height: 50,
+        borderRadius: 5,
+        borderWidth: 2,
+        borderColor: 'white'
     }
 });
