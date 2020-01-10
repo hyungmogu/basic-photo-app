@@ -72,6 +72,8 @@ export default class CameraScreen extends Component {
                                                         borderColor: 'white'
                                                     }}
 
+                                                    contain={'center'}
+
                                                     source={{
                                                         uri: photosPath + photo
                                                     }}
