@@ -18,16 +18,19 @@ export default class HomeScreen extends Component {
                     return (
                         <SafeAreaView style={styles.container}>
                             <View style={styles.headerContainer}>
-                                    <Text style={styles.headerText}>Photo App</Text>
+                                <Text style={styles.headerText}>Photo App</Text>
                             </View>
                             <ScrollView>
                                 <View style={styles.homeContainer}>
                                     {photos.map((photoUri, index) =>
-                                        <Image
-                                            key={index}
-                                            style={styles.image}
-                                            source={{uri: photosPath + photoUri}}
-                                        />
+                                        <TouchableOpacity onPress={() => navigate('PhotoDetail')}>
+                                            <Image
+                                                key={index}
+                                                style={styles.image}
+                                                source={{uri: photosPath + photoUri}}
+                                                onPress={() => navigate('PhotoDetail')}
+                                            />
+                                        </TouchableOpacity>
                                     )}
                                 </View>
                             </ScrollView>
@@ -45,50 +48,49 @@ export default class HomeScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'stretch',
-    flexDirection: 'column',
-    marginTop: StatusBar.currentHeight
-},
-headerContainer: {
-    marginTop: 10,
-    padding: 15
-},
-headerText: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    textAlign: 'left'
-},
-homeContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    padding: 10
-},
-image: {
-    width: 100,
-    height: 100,
-    margin: 5,
-},
-homeFooter: {
-    height: 100,
-    padding: 15,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
-},
-circleButton: {
-    borderWidth:2,
-    borderColor: 'black',
-    alignItems:'center',
-    justifyContent:'center',
-    width:75,
-    height:75,
-    backgroundColor:'#fff',
-    borderRadius:150,
-}
-
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'stretch',
+        flexDirection: 'column',
+        marginTop: StatusBar.currentHeight
+    },
+    headerContainer: {
+        marginTop: 10,
+        padding: 15
+    },
+    headerText: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        textAlign: 'left'
+    },
+    homeContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        padding: 10
+    },
+    image: {
+        width: 100,
+        height: 100,
+        margin: 5,
+    },
+    homeFooter: {
+        height: 100,
+        padding: 15,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    circleButton: {
+        borderWidth:2,
+        borderColor: 'black',
+        alignItems:'center',
+        justifyContent:'center',
+        width:75,
+        height:75,
+        backgroundColor:'#fff',
+        borderRadius:150,
+    }
 });
