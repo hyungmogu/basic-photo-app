@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { StatusBar, Text, View, SafeAreaView, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import {
+    StatusBar,
+    Text, View,
+    SafeAreaView, TouchableOpacity,
+    StyleSheet, Image
+} from 'react-native';
 
 import { Camera } from 'expo-camera';
 
@@ -41,7 +46,10 @@ export default class CameraScreen extends Component {
 
                     return (
                         <SafeAreaView style={styles.container}>
-                            <Camera style={styles.camera} type={type} ref={ref => {this.camera = ref}}>
+                            <Camera
+                                style={styles.camera}
+                                type={type} ref={ref => {this.camera = ref}}
+                            >
                             </Camera>
                             <View style={styles.cameraFooter}>
                                 <View style={styles.flipContainer}></View>
@@ -59,9 +67,7 @@ export default class CameraScreen extends Component {
                                         })}>
                                             <Image
                                                 style={styles.image}
-
                                                 contain={'center'}
-
                                                 source={{uri: photosPath + photo}}
                                             />
                                         </TouchableOpacity>
