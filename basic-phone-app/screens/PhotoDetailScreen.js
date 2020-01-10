@@ -1,10 +1,11 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Dimensions, Image, View, StyleSheet } from 'react-native';
 
-const PhotoDetailScreen = () => {
+const PhotoDetailScreen = ({navigation}) => {
+    let photo = navigation.state.params.photo;
     return (
         <View style={styles.container}>
-            <Text style={{color: '#fff'}}>Hello World</Text>
+            <Image source={{uri: photo}} resizeMode={'contain'} style={styles.image}/>
         </View>
     );
 }
@@ -17,6 +18,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'black'
+    },
+    image: {
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height
     }
 });
 

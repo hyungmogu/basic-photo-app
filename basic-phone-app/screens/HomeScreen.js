@@ -14,7 +14,6 @@ export default class HomeScreen extends Component {
                 { context => {
                     let photos = context.photos;
                     let photosPath = context.photosPath;
-
                     return (
                         <SafeAreaView style={styles.container}>
                             <View style={styles.headerContainer}>
@@ -23,12 +22,13 @@ export default class HomeScreen extends Component {
                             <ScrollView>
                                 <View style={styles.homeContainer}>
                                     {photos.map((photoUri, index) =>
-                                        <TouchableOpacity onPress={() => navigate('PhotoDetail')}>
+                                        <TouchableOpacity onPress={() => navigate('PhotoDetail', {
+                                            photo: photosPath + photoUri
+                                        })}>
                                             <Image
                                                 key={index}
                                                 style={styles.image}
                                                 source={{uri: photosPath + photoUri}}
-                                                onPress={() => navigate('PhotoDetail')}
                                             />
                                         </TouchableOpacity>
                                     )}
