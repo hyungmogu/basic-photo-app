@@ -58,7 +58,7 @@ export default class CameraScreen extends Component {
                                         >
                                         </TouchableOpacity>
                                     </View>
-                                    <View style={{flex: 1, display: 'flex', flexDirection: 'row', justifyContent: 'flex-end'}}>
+                                    <View style={styles.imageContainer}>
                                         { photo ?
                                             <TouchableOpacity onPress={() => navigate('PhotoDetail', {
                                                 photo: photosPath + photo
@@ -101,6 +101,12 @@ const styles = StyleSheet.create({
         height:75,
         backgroundColor:'white',
         borderRadius:150,
+    },
+    imageContainer: {
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-end'
     },
     image: {
         width: 50,
