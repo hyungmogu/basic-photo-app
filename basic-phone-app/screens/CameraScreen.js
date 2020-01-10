@@ -51,7 +51,7 @@ export default class CameraScreen extends Component {
                                 ></View>
                                 <View style={styles.cameraFooter}>
                                     <View style={{flex: 1}}></View>
-                                    <View style={{flex: 1, display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+                                    <View style={styles.buttonContainer}>
                                         <TouchableOpacity
                                             style={styles.circleButton}
                                             onPress={() => this.takePicture(addPhoto)}
@@ -101,6 +101,12 @@ const styles = StyleSheet.create({
         height:75,
         backgroundColor:'white',
         borderRadius:150,
+    },
+    buttonContainer: {
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center'
     },
     imageContainer: {
         flex: 1,
