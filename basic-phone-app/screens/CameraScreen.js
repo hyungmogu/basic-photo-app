@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { StatusBar, Text, View, SafeAreaView, TouchableOpacity, StyleSheet, Image } from 'react-native';
 
 import { Camera } from 'expo-camera';
 
@@ -40,42 +40,35 @@ export default class CameraScreen extends Component {
                     }
 
                     return (
-                        <View style={styles.container}>
+                        <SafeAreaView style={styles.container}>
                             <Camera style={styles.camera} type={type} ref={ref => {this.camera = ref}}>
-                                <View
-                                    style={{
-                                        flex: 1,
-                                        flexDirection: 'column'
-
-                                    }}
-                                ></View>
-                                <View style={styles.cameraFooter}>
-                                    <View style={styles.flipContainer}></View>
-                                    <View style={styles.buttonContainer}>
-                                        <TouchableOpacity
-                                            style={styles.circleButton}
-                                            onPress={() => this.takePicture(addPhoto)}
-                                        >
-                                        </TouchableOpacity>
-                                    </View>
-                                    <View style={styles.imageContainer}>
-                                        { photo ?
-                                            <TouchableOpacity onPress={() => navigate('PhotoDetail', {
-                                                photo: photosPath + photo
-                                            })}>
-                                                <Image
-                                                    style={styles.image}
-
-                                                    contain={'center'}
-
-                                                    source={{uri: photosPath + photo}}
-                                                />
-                                            </TouchableOpacity>
-                                        : null}
-                                    </View>
-                                </View>
                             </Camera>
-                        </View>
+                            <View style={styles.cameraFooter}>
+                                <View style={styles.flipContainer}></View>
+                                <View style={styles.buttonContainer}>
+                                    <TouchableOpacity
+                                        style={styles.circleButton}
+                                        onPress={() => this.takePicture(addPhoto)}
+                                    >
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={styles.imageContainer}>
+                                    { photo ?
+                                        <TouchableOpacity onPress={() => navigate('PhotoDetail', {
+                                            photo: photosPath + photo
+                                        })}>
+                                            <Image
+                                                style={styles.image}
+
+                                                contain={'center'}
+
+                                                source={{uri: photosPath + photo}}
+                                            />
+                                        </TouchableOpacity>
+                                    : null}
+                                </View>
+                            </View>
+                        </SafeAreaView>
                     );
                 }}
             </PhotoAppContext.Consumer>
@@ -90,7 +83,8 @@ const styles = StyleSheet.create({
         padding: 15,
         display: 'flex',
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: 'black'
     },
     circleButton: {
         borderWidth: 5,
@@ -106,13 +100,17 @@ const styles = StyleSheet.create({
         flex: 1
     },
     container: {
-        flex: 1
+        flex: 1,
+        marginTop: StatusBar.currentHeight
     },
     buttonContainer: {
         flex: 1,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center'
+    },
+    flipContainer: {
+        flex: 1
     },
     imageContainer: {
         flex: 1,
