@@ -28,6 +28,7 @@ export default class HomeScreen extends Component {
                                             <Image
                                                 key={index}
                                                 style={styles.image}
+                                                contain={'center'}
                                                 source={{uri: photosPath + photoUri}}
                                             />
                                         </TouchableOpacity>

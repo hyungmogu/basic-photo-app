@@ -10,7 +10,6 @@ const PhotoDetailScreen = ({navigation}) => {
     );
 }
 
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
