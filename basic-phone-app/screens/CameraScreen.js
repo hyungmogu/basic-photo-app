@@ -22,6 +22,7 @@ export default class CameraScreen extends Component {
     }
 
     render() {
+        const {navigate} = this.props.navigation;
         return (
             <PhotoAppContext.Consumer>
                 { context => {
@@ -58,7 +59,25 @@ export default class CameraScreen extends Component {
                                         </TouchableOpacity>
                                     </View>
                                     <View style={{flex: 1, display: 'flex', flexDirection: 'row', justifyContent: 'flex-end'}}>
-                                        { photo ? <Image style={{ width: 50, height: 50, borderRadius: 5, borderWidth: 2, borderColor: 'white' }} source={{ uri: photosPath + photo }}/> : null}
+                                        { photo ?
+                                            <TouchableOpacity onPress={() => navigate('PhotoDetail', {
+                                                photo: photosPath + photo
+                                            })}>
+                                                <Image
+                                                    style={{
+                                                        width: 50,
+                                                        height: 50,
+                                                        borderRadius: 5,
+                                                        borderWidth: 2,
+                                                        borderColor: 'white'
+                                                    }}
+
+                                                    source={{
+                                                        uri: photosPath + photo
+                                                    }}
+                                                />
+                                            </TouchableOpacity>
+                                        : null}
                                     </View>
                                 </View>
                             </Camera>
