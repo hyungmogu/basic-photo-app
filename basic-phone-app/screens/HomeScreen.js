@@ -1,48 +1,45 @@
 import React, { Component } from 'react';
-import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, StatusBar, Image, Text, View, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
 
-import * as FileSystem from 'expo-file-system';
+import { Ionicons } from '@expo/vector-icons';
+
+import { PhotoAppContext } from '../components/Context';
 
 export default class HomeScreen extends Component {
-    photosPath = `${FileSystem.documentDirectory}photos/`;
-    state = {
-        photos: []
-    }
-
-    async componentDidMount() {
-        let photos = await FileSystem.readDirectoryAsync(this.photosPath);
-
-        if (photos && Array.isArray(photos)) {
-            this.setState({ photos: photos });
-        }
-    }
 
     render() {
         const {navigate} = this.props.navigation;
-        let photos = this.state.photos;
         return (
-            <SafeAreaView style={styles.container}>
-                <View style={styles.headerContainer}>
-                        <Text style={styles.headerText}>Photo App</Text>
-                </View>
-                <ScrollView>
-                    <View style={styles.homeContainer}>
-                        {photos.map((photoUri, index) =>
-                            <Image
-                                key={index}
-                                style={styles.image}
-                                source={{uri: this.photosPath + photoUri}}
-                            />
-                        )}
-                    </View>
-                </ScrollView>
-                <View style={styles.homeFooter}>
-                    <TouchableOpacity style={styles.circleButton} onPress={() => navigate('Camera')}>
-                        <Ionicons name="md-camera" size={30}/>
-                    </TouchableOpacity>
-                </View>
-            </SafeAreaView>
+            <PhotoAppContext.Consumer>
+                { context => {
+                    let photos = context.photos;
+                    let photosPath = context.photosPath;
+
+                    return (
+                        <SafeAreaView style={styles.container}>
+                            <View style={styles.headerContainer}>
+                                    <Text style={styles.headerText}>Photo App</Text>
+                            </View>
+                            <ScrollView>
+                                <View style={styles.homeContainer}>
+                                    {photos.map((photoUri, index) =>
+                                        <Image
+                                            key={index}
+                                            style={styles.image}
+                                            source={{uri: photosPath + photoUri}}
+                                        />
+                                    )}
+                                </View>
+                            </ScrollView>
+                            <View style={styles.homeFooter}>
+                                <TouchableOpacity style={styles.circleButton} onPress={() => navigate('Camera')}>
+                                    <Ionicons name="md-camera" size={30}/>
+                                </TouchableOpacity>
+                            </View>
+                        </SafeAreaView>
+                    );
+                }}
+            </PhotoAppContext.Consumer>
         );
     }
 }

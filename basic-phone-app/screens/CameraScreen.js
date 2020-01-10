@@ -1,25 +1,13 @@
-import React, { useState, useEffect, Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Alert, Image } from 'react-native';
+import React, { Component } from 'react';
+import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native';
 
 import { Camera } from 'expo-camera';
-import * as FileSystem from 'expo-file-system';
 
-import uuidv1 from 'uuid/v1';
+import { PhotoAppContext } from '../components/Context';
 
 export default class CameraScreen extends Component {
 
-    state = {
-        hasPermission: null,
-        cameraType: Camera.Constants.Type.front,
-        latestImage: null
-    }
-
-    async componentDidMount() {
-        const { status } = await Camera.requestPermissionsAsync();
-        this.setState({ hasPermission: status === 'granted' });
-    }
-
-    takePicture = async () => {
+    takePicture = async (addPhoto) => {
         if (!this.camera) {
             return;
         }
@@ -30,51 +18,54 @@ export default class CameraScreen extends Component {
             return
         }
 
-        let filePath = `${FileSystem.documentDirectory}photos/photo_app_${uuidv1()}.jpg`;
-        FileSystem.copyAsync({
-            from: photo.uri,
-            to: filePath
-        });
-        this.setState({ latestImage: filePath });
+        addPhoto(photo);
     }
 
     render() {
-        let permission = this.state.hasPermission;
-        let type = this.state.cameraType;
-        let photo = this.state.latestImage;
-
-        if (permission === null) {
-            return <View />;
-        }
-        if (permission === false) {
-            return <Text>No access to camera</Text>;
-        }
-
         return (
-            <View style={{ flex: 1 }}>
-                <Camera style={{ flex: 1 }} type={type} ref={ref => {this.camera = ref}}>
-                    <View
-                        style={{
-                            flex: 1,
-                            flexDirection: 'column'
+            <PhotoAppContext.Consumer>
+                { context => {
+                    let permission = context.hasPermission;
+                    let type = context.cameraType;
+                    let photo = context.latestImage;
+                    let photosPath = context.photosPath;
+                    let addPhoto = context.actions.addPhoto;
 
-                        }}
-                    ></View>
-                    <View style={styles.cameraFooter}>
-                        <View style={{flex: 1}}></View>
-                        <View style={{flex: 1, display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
-                            <TouchableOpacity
-                                style={styles.circleButton}
-                                onPress={this.takePicture}
-                            >
-                            </TouchableOpacity>
+                    if (permission === null) {
+                        return <View />;
+                    }
+                    if (permission === false) {
+                        return <Text>No access to camera</Text>;
+                    }
+
+                    return (
+                        <View style={{ flex: 1 }}>
+                            <Camera style={{ flex: 1 }} type={type} ref={ref => {this.camera = ref}}>
+                                <View
+                                    style={{
+                                        flex: 1,
+                                        flexDirection: 'column'
+
+                                    }}
+                                ></View>
+                                <View style={styles.cameraFooter}>
+                                    <View style={{flex: 1}}></View>
+                                    <View style={{flex: 1, display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+                                        <TouchableOpacity
+                                            style={styles.circleButton}
+                                            onPress={() => this.takePicture(addPhoto)}
+                                        >
+                                        </TouchableOpacity>
+                                    </View>
+                                    <View style={{flex: 1, display: 'flex', flexDirection: 'row', justifyContent: 'flex-end'}}>
+                                        { photo ? <Image style={{ width: 50, height: 50, borderRadius: 5, borderWidth: 2, borderColor: 'white' }} source={{ uri: photosPath + photo }}/> : null}
+                                    </View>
+                                </View>
+                            </Camera>
                         </View>
-                        <View style={{flex: 1, display: 'flex', flexDirection: 'row', justifyContent: 'flex-end'}}>
-                            { photo ? <Image style={{ width: 50, height: 50, borderRadius: 5, borderWidth: 2, borderColor: 'white' }} source={{ uri: this.state.latestImage }}/> : null }
-                        </View>
-                    </View>
-                </Camera>
-            </View>
+                    );
+                }}
+            </PhotoAppContext.Consumer>
         );
     }
 }
