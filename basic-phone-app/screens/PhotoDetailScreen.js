@@ -1,11 +1,18 @@
 import React from 'react';
-import { Dimensions, Image, View, StyleSheet } from 'react-native';
+import {
+    Dimensions, Image,
+    View, StyleSheet
+} from 'react-native';
 
 const PhotoDetailScreen = ({navigation}) => {
     let photo = navigation.state.params.photo;
     return (
         <View style={styles.container}>
-            <Image source={{uri: photo}} resizeMode={'contain'} style={styles.image}/>
+            <Image
+                source={{uri: photo}}
+                resizeMode={'contain'}
+                style={styles.image}
+            />
         </View>
     );
 }
