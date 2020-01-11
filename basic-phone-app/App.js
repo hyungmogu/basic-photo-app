@@ -19,17 +19,22 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    let photos = await FileSystem.readDirectoryAsync(this.state.photosPath);
     const { status } = await Camera.requestPermissionsAsync();
 
-    if (photos && Array.isArray(photos)) {
+    this.setState({
+      hasPermission: status === 'granted'
+    });
 
-        this.setState({
-          photos: photos,
-          hasPermission: status === 'granted',
-          latestImage: photos[photos.length - 1]
-        });
-    }
+    try {
+      let photos = await FileSystem.readDirectoryAsync(this.state.photosPath);
+
+      if (photos && Array.isArray(photos)) {
+          this.setState({
+            photos: [...photos],
+            latestImage: Array.isArray(photos) ? photos[photos.length - 1] : []
+          });
+      }
+    } catch (Error) {}
   }
 
   handleAddPhoto = (photo) => {
