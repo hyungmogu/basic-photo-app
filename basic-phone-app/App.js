@@ -47,6 +47,14 @@ class App extends Component {
     });
   }
 
+  handleFlipCamera = () => {
+    this.setState(prevState => {
+      return {
+        cameraType: prevState.cameraType === Camera.Constants.Type.front ? Camera.Constants.Type.back : Camera.Constants.Type.front
+      }
+    })
+  }
+
   render() {
     return (
       <PhotoAppContext.Provider value={{
@@ -56,7 +64,8 @@ class App extends Component {
         latestImage: this.state.latestImage,
         photosPath: this.state.photosPath,
         actions: {
-          addPhoto: this.handleAddPhoto
+          addPhoto: this.handleAddPhoto,
+          flipCamera: this.handleFlipCamera
         }
       }}>
         <AppContainer/>

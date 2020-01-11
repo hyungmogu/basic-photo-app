@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 
 import { Camera } from 'expo-camera';
+import { Ionicons } from '@expo/vector-icons';
 
 import { PhotoAppContext } from '../components/Context';
 
@@ -36,6 +37,7 @@ export default class CameraScreen extends Component {
                     let photo = context.latestImage;
                     let photosPath = context.photosPath;
                     let addPhoto = context.actions.addPhoto;
+                    let flipCamera = context.actions.flipCamera;
 
                     if (permission === null) {
                         return <View />;
@@ -52,7 +54,11 @@ export default class CameraScreen extends Component {
                             >
                             </Camera>
                             <View style={styles.cameraFooter}>
-                                <View style={styles.flipContainer}></View>
+                                <View style={styles.flipContainer}>
+                                    <TouchableOpacity onPress={flipCamera}>
+                                        <Ionicons name="md-reverse-camera" style={{color: 'white'}} size={40}/>
+                                    </TouchableOpacity>
+                                </View>
                                 <View style={styles.buttonContainer}>
                                     <TouchableOpacity
                                         style={styles.circleButton}
